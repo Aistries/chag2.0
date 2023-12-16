@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to chickenhawk air games</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=AUzq-AeC-wT_OEtiRCEh2fIIShKHOHWJbat7RPO0EZVGdmahqpY-tpdnHbWXdZSIYHJFzzmuJcL6Gh5V"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            display: flex; /* Customize the background color here */
+        }
+
+        h2{
+            color: aliceblue;
+        }
+
+       
+        .table-container {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.2s ease-out;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 30%; /* Adjust the width as needed */
+            margin-top: 20px;
+            border: 1px solid white; /* Border color */
+        }
+
+        th, td {
+            border: 1px solid rgb(8, 1, 1);
+            padding: 8px;
+            color: #f2f2f2;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .expand-button {
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            font-size: 18px;
+        }
+        
+        .navbar {
+            background-color: #020202;
+            overflow: hidden;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar a:hover {
+            background-color: #ffffff;
+            color: rgb(255, 255, 255);
+        }
+
+        .footer{
+            
+            color: rgb(255, 255, 255);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            color: #ffffff;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 300px);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+      
+        
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        #fullscreenButton,
+        #cashOutButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffffff;
+            color: #020202;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        #fullscreenButton:hover,
+        #cashOutButton:hover {
+            background-color: #555;
+        }
+.prof{
+    color: aliceblue;
+}
+
+p{
+    color: aliceblue;
+}
+
+.buttons{
+    align-items: end;
+}
+
+#chat-container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    /* Chat text styles */
+    #chat-text {
+        color: white;
+        font-family: monospace;
+        font-size: 16px;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Hide overflow text */
+        border-right: 1px solid white; /* Typing cursor effect */
+        padding: 10px;
+        animation: typing 2s steps(28) 1s 1 normal both;
+    }
+
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+        }
+    }
+
+    </style>
+</head>
+
+<p id="user-email"></p>
+<p id="user-uid"></p>
+
+<button id="signout-btn">Sign Out</button>
+
+<div class="buttons">
+    <div id="deposit-input" style="display: contents;">
+        <input type="number" id="amountdepo" required step="0.01" placeholder="Enter deposit amount">
+        <button id="deposit-btn" type="submit">Deposit</button>
+    </div>
+    <div id="withdraw-input" style="display: contents;">
+        <input type="number" id="amountwithdraw" required step="0.01" placeholder="Enter withdraw amount">
+        <button id="withdraw-btn">Withdraw</button>
+    </div>
+
+<div class="paypal">
+    <h2>Use Paypal</h2>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick" />
+        <input type="hidden" name="hosted_button_id" value="J26D9NN6RLM8E" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif"name="submit" title="PayPal - The safer, easier way to pay online!" alt="Buy Now" />
+      </form>
+</div>
+</div>
+
+<body background="backgaltt.png">
+    
+    <div class="navbar">
+        <a href="android.html">Android</a>
+        <a href="iOS.html">iOS</a>
+        <a href="about.html">About</a>
+        <a href="downloads.html">Download</a>
+        
+    </div>
+     <!-- Profile Icon -->
+     <div id="profile-icon">
+        <img src="hawklogo.png" alt="Profile Icon" width="50" height="50">
+    </div>
+
+    <div id="wallet">
+        <h2>My Wallet</h2>
+        <p>Balance: <span id="balance">0.00</span></p>
+    </div>
+
+
+   
+   
+
+    <div class="header">
+        <h1>Chickenhawk Air Games</h1>
+        <button id="fullscreenButton">Fullscreen</button>
+    </div>
+
+    <div id="chat-container">
+        <p id="chat-text"></p>
+    </div>
+    
+
+    <div class="table-container">
+        <button class="expand-button" onclick="toggleTable()">Game History</button>
+        <table id="historyTable">
+            <!-- Table content goes here -->
+        </table>
+    </div>
+
+   
+    
+
+      <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+   
+
+  
+    <script src="game.js"></script>
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+   
+
+    <script>
+        const profileIcon = document.getElementById('profile-icon');
+
+        profileIcon.addEventListener('click', () => {
+            // Redirect the user to the profile.html page when the profile icon is clicked
+            window.location.href = 'profile.html';
+        });
+    </script>
+
+<script>
+ const chatMessages = [
+        "Dean: Let's fly some planes!",
+        "Ricky: Fly fly fly.",
+        "Greg: Just made myself my first 20,000 from the game.",
+        "Sam_the_wire: Mnangoja kuambiwa.",
+
+        "Felixbiadman: Wuuuuuuu, 10,000 clocked in",
+        "Johnte: Wananimalizia float buana, how do they play this game.",
+        "Sarafina: Finally got a grip how the game works, 18,000 in my account right now.",
+        "Tony: Better than Aviator my friend.",
+    ];
+
+    let currentMessageIndex = 0;
+
+    // Function to display text with a typewriter effect
+    function typeWriter(text, i, fnCallback) {
+        if (i < text.length) {
+            document.getElementById("chat-text").innerHTML = text.substring(0, i + 1);
+            setTimeout(function () {
+                typeWriter(text, i + 1, fnCallback);
+            }, 50); // Adjust typing speed (milliseconds)
+        } else if (typeof fnCallback == "function") {
+            setTimeout(fnCallback, 1000);
+        }
+    }
+
+    // Function to handle displaying chat messages
+    function displayChatMessages() {
+        if (currentMessageIndex < chatMessages.length) {
+            typeWriter(chatMessages[currentMessageIndex], 0, function () {
+                currentMessageIndex++;
+                // Continue with the next message
+                displayChatMessages();
+            });
+        }
+    }
+
+    // Start displaying chat messages when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        displayChatMessages();
+        return;
+    });
+</script>
+
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+
+<script>
+    // Firebase SDK configuration (use your own Firebase project config)
+    const firebaseConfig = {
+            apiKey: "AIzaSyCN4TPr6Kh4FvBPtVpRYQ3zC1ie9VOyqSU",
+          authDomain: "quick-cash-81b2f.firebaseapp.com",
+          databaseURL: "https://quick-cash-81b2f-default-rtdb.firebaseio.com",
+          projectId: "quick-cash-81b2f",
+          storageBucket: "quick-cash-81b2f.appspot.com",
+          messagingSenderId: "259264956470",
+          appId: "1:259264956470:web:355cfe14764d5ca6d53097",
+          measurementId: "G-9D1TH2TDD5"
+        };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged((user) => {
+        const userEmailElement = document.getElementById('user-email');
+        const userUidElement = document.getElementById('user-uid');
+        const userId = user ? user.uid : null;
+
+        if (user) {
+            const userEmail = user.email;
+
+            userEmailElement.style.color = 'white';
+            userUidElement.style.color = 'white';
+
+            userEmailElement.textContent = `Email: ${userEmail}`;
+            userUidElement.textContent = `User ID: ${userId}`;
+
+            const userMobileNumberElement = document.getElementById('user-mobile-number');
+
+            const userRef = database.ref(`/users/${userId}/mobileNumber`);
+
+            userRef.once('value')
+                .then((snapshot) => {
+                    const mobileNumber = snapshot.val();
+                    userMobileNumberElement.textContent = `Mobile Number: ${mobileNumber}`;
+                })
+                .catch((error) => {
+                    console.error('Error retrieving mobile number:', error);
+                });
+
+            // Deposit button click event
+            document.getElementById('deposit-btn').addEventListener('click', () => {
+                const depositAmount = document.getElementById('amountdepo').value;
+
+                if (!depositAmount || isNaN(depositAmount) || depositAmount <= 0) {
+                    alert('Invalid deposit amount. Please enter a valid amount.');
+                    return;
+                }
+
+                initiateMpesaSTKPush(userMobileNumberElement.textContent.split(":")[1].trim(), depositAmount);
+            });
+        } else {
+            userEmailElement.textContent = 'User not logged in.';
+            userUidElement.textContent = 'User ID: N/A';
+        }
+    });
+
+    document.getElementById('signout-btn').addEventListener('click', () => {
+        auth.signOut().then(() => {
+            alert('You have been signed out. Please log in to access the page.');
+            window.location.href = 'login.html';
+        }).catch((error) => {
+            console.error('Sign-out error:', error);
+        });
+    });
+</script>
+
+
+
+<script>
+   function initiateMpesaSTKPush(mobileNumber, depositAmount) {
+  const requestData = { mobileNumber, depositAmount };
+
+  fetch('http://localhost:3000/mpesa-stk-push', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    alert('M-Pesa STK push initiated to ' + mobileNumber);
+  })
+  .catch(error => {
+    console.error('M-Pesa STK push error:', error);
+    alert('Error initiating M-Pesa STK push. Please try again.');
+  });
+}
+
+</script>
+
+</body>
+</html>
+
+

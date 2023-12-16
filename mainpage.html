@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to chickenhawk air games</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover; /* Customize the background color here */
+        }
+
+       
+        .table-container {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.2s ease-out;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 30%; /* Adjust the width as needed */
+            margin-top: 20px;
+            border: 1px solid white; /* Border color */
+        }
+
+        th, td {
+            border: 1px solid rgb(8, 1, 1);
+            padding: 8px;
+            color: #f2f2f2;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .expand-button {
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            font-size: 18px;
+        }
+        
+        .navbar {
+            background-color: #020202;
+            overflow: hidden;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar a:hover {
+            background-color: #ffffff;
+            color: rgb(255, 255, 255);
+        }
+
+        .footer{
+            
+            color: rgb(255, 255, 255);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            color: #ffffff;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 300px);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+      
+        
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        #fullscreenButton,
+        #cashOutButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffffff;
+            color: #020202;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        #fullscreenButton:hover,
+        #cashOutButton:hover {
+            background-color: #555;
+        }
+
+
+    </style>
+</head>
+
+<body background="backgaltt.png">
+    <div class="navbar">
+        <a href="android.html">Android</a>
+        <a href="iOS.html">iOS</a>
+        <a href="about.html">About</a>
+        <a href="downloads.html">Download</a>
+        <a href="index.html">Logout</a>
+        
+    </div>
+    <div class="controls">
+        <div><button class="intaSendPayButton" data-method="M-PESA" data-amount="10" data-currency="KES">Pay with M-Pesa</button></div>
+        <button id="fullscreenButton">Fullscreen</button>
+        <button id="addStakeButton">Add Stake</button>
+        
+        <p id="stakeDisplay">Stake: $0</p>
+    </div>
+
+    <div class="header">
+        <h1>Chickenhawk Air Games</h1>
+        <p>Join us and Make Money</p>
+        <p>Fly the airplane, avoid enemies, and earn points!</p>
+
+    </div>
+
+    <div class="table-container">
+        <button class="expand-button" onclick="toggleTable()">Game History</button>
+        <table id="historyTable">
+            <!-- Table content goes here -->
+        </table>
+    </div>
+
+      <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+   
+
+    <script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
+    
+    <script>
+        const intaSend = new window.IntaSend({
+            publicAPIKey: "ISPubKey_test_7228a910-71f4-4338-93ce-ba7f784e2436",
+            live: true // Set to true when going live
+        });
+
+        // Add an event listener to the button to initiate the payment
+        document.querySelector(".intaSendPayButton").addEventListener("click", () => {
+            const amount = document.querySelector(".intaSendPayButton").getAttribute("data-amount");
+            const currency = document.querySelector(".intaSendPayButton").getAttribute("data-currency");
+
+            // Define the payment details
+            const paymentDetails = {
+                amount: amount,
+                currency: currency,
+                reference: "ordertest", // Replace with your payment reference
+                phone: "254715711306", // Replace with the recipient's phone number
+                description: "Payment for your order" // Replace with your payment description
+            };
+
+            // Initiate the STK payment
+            intaSend.stkPush(paymentDetails)
+                .then((response) => {
+                    console.log("Payment initiated successfully.", response);
+                    // Handle success or redirection here
+                })
+                .catch((error) => {
+                    console.error("Payment initiation failed.", error);
+                    // Handle errors or show an error message to the user
+                });
+        });
+    </script>
+   
+    <script src="game.js"></script>
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+</body>
+</html>
+
+

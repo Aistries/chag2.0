@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Create Account</h1>
+    <form id="registration-form">
+        <label for="phone">Mobile Number:</label>
+        <input type="tel" id="phone" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+
+    <script>
+        // Firebase SDK configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCN4TPr6Kh4FvBPtVpRYQ3zC1ie9VOyqSU",
+          authDomain: "quick-cash-81b2f.firebaseapp.com",
+          databaseURL: "https://quick-cash-81b2f-default-rtdb.firebaseio.com",
+          projectId: "quick-cash-81b2f",
+          storageBucket: "quick-cash-81b2f.appspot.com",
+          messagingSenderId: "259264956470",
+          appId: "1:259264956470:web:355cfe14764d5ca6d53097",
+          measurementId: "G-9D1TH2TDD5"
+        };
+
+        // Initialize Firebase
+        const { initializeApp } = firebase;
+        const app = initializeApp(firebaseConfig);
+
+        const registrationForm = document.getElementById('registration-form');
+
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+
+            // Register the user with Firebase Authentication
+            firebase.auth(app).createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // User registered successfully
+                    const user = userCredential.user;
+                    console.log('User registered:', user);
+
+                    // Update the user's profile in Realtime Database
+                    const userId = user.uid;
+                    const database = firebase.database(app);
+                    const userRef = database.ref('/users/' + userId);
+
+                    // Update user profile data
+                    userRef.set({
+                        username: 'Toul', // Example username
+                        email: email,
+                        mobileNumber: phone, // Store mobile number
+                        // Add more profile information here
+                    });
+
+                    // Redirect the user to the main page
+                    alert("Successful Registration");
+                    window.location.href = 'mainchag.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("The email address seems to exist in our storage. Please use a different email account or try logging in.");
+                    console.error('Registration error:', errorCode, errorMessage);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+
+    <div id="user-email"></div>
+    <div id="user-uid"></div>
+    <div id="user-phone"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+
+    <script>
+        // Firebase SDK configuration (use your own Firebase project config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCN4TPr6Kh4FvBPtVpRYQ3zC1ie9VOyqSU",
+            authDomain: "quick-cash-81b2f.firebaseapp.com",
+            databaseURL: "https://quick-cash-81b2f-default-rtdb.firebaseio.com",
+            projectId: "quick-cash-81b2f",
+            storageBucket: "quick-cash-81b2f.appspot.com",
+            messagingSenderId: "259264956470",
+            appId: "1:259264956470:web:355cfe14764d5ca6d53097"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Check if a user is authenticated
+        firebase.auth().onAuthStateChanged((user) => {
+            const userEmailElement = document.getElementById('user-email');
+            const userUidElement = document.getElementById('user-uid');
+            const userPhoneElement = document.getElementById('user-phone');
+
+            if (user) {
+                const userEmail = user.email;
+                const userUid = user.uid;
+                const userPhone = user.phoneNumber;
+
+                userEmailElement.textContent = `Email: ${userEmail}`;
+                userUidElement.textContent = `User ID: ${userUid}`;
+                userPhoneElement.textContent = `User Phone: ${userPhone}`;
+            } else {
+                userEmailElement.textContent = 'User not logged in.';
+                userUidElement.textContent = 'User ID: N/A';
+            }
+        });
+    </script>
+</body>
+</html>

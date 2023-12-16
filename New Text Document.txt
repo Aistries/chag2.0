@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ... (your existing styles) ... */
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        }
+        .login-container h2 {
+            text-align: center;
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-form label {
+            margin-bottom: 5px;
+        }
+        .login-form input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .login-form button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="header">
+        <h1>Chickenhawk Air Games</h1>
+        <p>Join us and Make Money</p>
+        <p>Fly the airplane, avoid enemies, and earn points!</p>
+    </div>
+    <div class="game-container">
+        <!-- ... (your canvas and controls) ... -->
+    </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form class="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Make a Payment</title>
+</head>
+<body>
+    <h1>Make a Payment</h1>
+
+    <button class="intaSendPayButton" data-amount="10" data-currency="KES">Pay Now</button>
+    
+    <script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
+    <script>
+        const intaSend = new window.IntaSend({
+            publicAPIKey: "ISPubKey_live_a9d742ed-20b9-401c-a31d-12abf1e8e68a",
+            live: true // Set to true when going live
+        });
+
+        // Add an event listener to the button to initiate the payment
+        document.querySelector(".intaSendPayButton").addEventListener("click", () => {
+            const amount = document.querySelector(".intaSendPayButton").getAttribute("data-amount");
+            const currency = document.querySelector(".intaSendPayButton").getAttribute("data-currency");
+
+            // Define the payment details
+            const paymentDetails = {
+                amount: amount,
+                currency: currency,
+                reference: "ordertest", // Replace with your payment reference
+                phone: "254715711306", // Replace with the recipient's phone number
+                description: "Payment for your order" // Replace with your payment description
+            };
+
+            // Initiate the STK payment
+            intaSend.stkPush(paymentDetails)
+                .then((response) => {
+                    console.log("Payment initiated successfully.", response);
+                    // Handle success or redirection here
+                })
+                .catch((error) => {
+                    console.error("Payment initiation failed.", error);
+                    // Handle errors or show an error message to the user
+                });
+        });
+    </script>
+</body>
+</html>
